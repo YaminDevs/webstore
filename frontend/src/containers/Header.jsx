@@ -3,7 +3,7 @@ import Cart from "../components/Cart";
 import React, { useState } from "react";
 
 const Header = () => {
-    const [cartOpen, setCartOpen] = useState(true)
+    const [cartOpen, setCartOpen] = useState(false)
     return(
         <>
             <Navbar cartOpen={cartOpen} setCartOpen={setCartOpen} />

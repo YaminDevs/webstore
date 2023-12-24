@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import logo from '../assets/off-white-logo.png'
+import logo from '../assets/logo.png'
 
 const navigation = {
 
@@ -214,17 +214,6 @@ export default function Navbar({setCartOpen}) {
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
-                        {page.name}
-                      </a>
-                    </div>
-                  ))}
-                </div>
-
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
                     <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
@@ -255,7 +244,7 @@ export default function Navbar({setCartOpen}) {
         </Dialog>
       </Transition.Root>
 
-      <header className="relative bg-white">
+      <header className="relative bg-da">
 
         <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="border-b border-gray-200">
@@ -274,11 +263,7 @@ export default function Navbar({setCartOpen}) {
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <img
-                    className="h-28 w-auto"
-                    src={logo}
-                    alt="logo"
-                  />
+                  <img src={logo} className=' w-16 h-auto'/>
                 </a>
               </div>
 
@@ -293,7 +278,7 @@ export default function Navbar({setCartOpen}) {
                             <Popover.Button
                               className={classNames(
                                 open
-                                  ? 'border-indigo-600 text-indigo-600'
+                                  ? 'border-beige text-beige-dark'
                                   : 'border-transparent text-gray-700 hover:text-gray-800',
                                 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
                               )}
@@ -369,16 +354,6 @@ export default function Navbar({setCartOpen}) {
                       )}
                     </Popover>
                   ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
-                  ))}
                 </div>
               </Popover.Group>
 
@@ -410,7 +385,7 @@ export default function Navbar({setCartOpen}) {
                   <a href="#" className="p-2 text-gray-400 hover:text-gray-500 flex flex-row border border-solid border-gray-200 rounded-md gap-4">
                     <span className="sr-only">Search</span>
                     <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                    <input type='text' placeholder='search' className=' bg-transparent'/>
+                    <input type='text' placeholder='search' className=' bg-transparent outline-none'/>
                   </a>
                 </div>
 
@@ -422,7 +397,7 @@ export default function Navbar({setCartOpen}) {
                       aria-hidden="true"
                       onClick={() => setCartOpen(true)}
                     />
-                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                    <span className="ml-2 text-sm font-medium text-gray-400 group-hover:text-gray-500">0</span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
                 </div>

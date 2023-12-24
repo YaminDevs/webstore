@@ -25,41 +25,28 @@ const navigation = {
       ],
       sections: [
         {
-          id: 'clothing',
-          name: 'Clothing',
+          id: 'off-white',
+          name: 'Off-White',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
-          ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
             { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
             { name: 'Belts', href: '#' },
+            { name: 'Clothes', href: '#' },
+            { name: 'Hats', href: '#' },
+            { name: 'Jewellery', href: '#' },
+            { name: 'Shoes', href: '#'},
+            { name: 'Sunglasses', href: '#' },
           ],
         },
         {
-          id: 'brands',
-          name: 'Brands',
+          id: 'nike',
+          name: 'Off-White x Nike',
           items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
+            { name: 'Shoes', href: '#' },
+            { name: 'T-Shirts', href: '#' },
+            { name: 'Hoodies', href: '#' },
+            { name: 'Jackets', href: '#' },
+            { name: 'Pants', href: '#' },
+            { name: 'Browse All', href: '#' },
           ],
         },
       ],
@@ -84,38 +71,28 @@ const navigation = {
       ],
       sections: [
         {
-          id: 'clothing',
-          name: 'Clothing',
+          id: 'off-white',
+          name: 'Off-White',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
-          ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
             { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
             { name: 'Belts', href: '#' },
+            { name: 'Clothes', href: '#' },
+            { name: 'Hats', href: '#' },
+            { name: 'Jewellery', href: '#' },
+            { name: 'Shoes', href: '#'},
+            { name: 'Sunglasses', href: '#' },
           ],
         },
         {
-          id: 'brands',
-          name: 'Brands',
+          id: 'nike',
+          name: 'Off-White x Nike',
           items: [
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
+            { name: 'Shoes', href: '#' },
+            { name: 'T-Shirts', href: '#' },
+            { name: 'Hoodies', href: '#' },
+            { name: 'Jackets', href: '#' },
+            { name: 'Pants', href: '#' },
+            { name: 'Browse All', href: '#' },
           ],
         },
       ],
@@ -131,9 +108,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
+export default function Navbar({setCartOpen}) {
   const [open, setOpen] = useState(false)
-  const [cartOpen, setCartOpen] = useState(false)
 
   return (
     <div className="bg-white">
@@ -445,6 +421,7 @@ export default function Navbar() {
                     <ShoppingBagIcon
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
+                      onClick={() => setCartOpen(true)}
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span className="sr-only">items in cart, view bag</span>

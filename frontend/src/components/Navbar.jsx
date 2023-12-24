@@ -161,7 +161,7 @@ export default function Navbar({setCartOpen}) {
                           key={category.name}
                           className={({ selected }) =>
                             classNames(
-                              selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900',
+                              selected ? 'border-beige text-beige-dark' : 'border-transparent text-gray-900',
                               'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium'
                             )
                           }
@@ -410,7 +410,7 @@ export default function Navbar({setCartOpen}) {
                   <a href="#" className="p-2 text-gray-400 hover:text-gray-500 flex flex-row border border-solid border-gray-200 rounded-md gap-4">
                     <span className="sr-only">Search</span>
                     <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                    <input type='text' placeholder='search' className='outline-none'/>
+                    <input type='text' placeholder='search' className=' bg-transparent'/>
                   </a>
                 </div>
 

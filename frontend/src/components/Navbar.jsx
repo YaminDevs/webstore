@@ -6,6 +6,7 @@ import logo from '../assets/logo.png'
 const navigation = {
 
 
+  
   categories: [
     {
       id: 'women',
@@ -26,30 +27,33 @@ const navigation = {
       ],
       sections: [
         {
-          id: 'off-white',
-          name: 'Off-White',
+          id: 'clothing',
+          name: 'Clothing',
           items: [
-            { name: 'Bags', href: '#' },
-            { name: 'Belts', href: '#' },
-            { name: 'Clothes', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Jewellery', href: '#' },
-            { name: 'Shoes', href: '#'},
-            { name: 'Sunglasses', href: '#' },
-          ],
-        },
-        {
-          id: 'nike',
-          name: 'Off-White x Nike',
-          items: [
-            { name: 'Shoes', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Hoodies', href: '#' },
-            { name: 'Jackets', href: '#' },
+            { name: 'Tops', href: '#' },
+            { name: 'Dresses', href: '#' },
             { name: 'Pants', href: '#' },
+            { name: 'Denim', href: '#' },
+            { name: 'Sweaters', href: '#' },
+            { name: 'T-Shirts', href: '#' },
+            { name: 'Jackets', href: '#' },
+            { name: 'Activewear', href: '#' },
             { name: 'Browse All', href: '#' },
           ],
         },
+        {
+          id: 'accessories',
+          name: 'Accessories',
+          items: [
+            { name: 'Watches', href: '#' },
+            { name: 'Wallets', href: '#' },
+            { name: 'Bags', href: '#' },
+            { name: 'Sunglasses', href: '#' },
+            { name: 'Hats', href: '#' },
+            { name: 'Belts', href: '#' },
+          ],
+        },
+
       ],
     },
     {
@@ -72,30 +76,31 @@ const navigation = {
       ],
       sections: [
         {
-          id: 'off-white',
-          name: 'Off-White',
+          id: 'clothing',
+          name: 'Clothing',
           items: [
-            { name: 'Bags', href: '#' },
-            { name: 'Belts', href: '#' },
-            { name: 'Clothes', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Jewellery', href: '#' },
-            { name: 'Shoes', href: '#'},
-            { name: 'Sunglasses', href: '#' },
-          ],
-        },
-        {
-          id: 'nike',
-          name: 'Off-White x Nike',
-          items: [
-            { name: 'Shoes', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Hoodies', href: '#' },
-            { name: 'Jackets', href: '#' },
+            { name: 'Tops', href: '#' },
             { name: 'Pants', href: '#' },
+            { name: 'Sweaters', href: '#' },
+            { name: 'T-Shirts', href: '#' },
+            { name: 'Jackets', href: '#' },
+            { name: 'Activewear', href: '#' },
             { name: 'Browse All', href: '#' },
           ],
         },
+        {
+          id: 'accessories',
+          name: 'Accessories',
+          items: [
+            { name: 'Watches', href: '#' },
+            { name: 'Wallets', href: '#' },
+            { name: 'Bags', href: '#' },
+            { name: 'Sunglasses', href: '#' },
+            { name: 'Hats', href: '#' },
+            { name: 'Belts', href: '#' },
+          ],
+        },
+       
       ],
     },
   ],
@@ -104,7 +109,6 @@ const navigation = {
     { name: 'Stores', href: '#' },
   ],
 }
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -229,12 +233,12 @@ export default function Navbar({setCartOpen}) {
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="#" className="-m-2 flex items-center p-2">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-base font-medium text-gray-900">Euro</span>
+                    <select className='rounded-md p-1 bg-white'>
+                      <option>Euro €</option>
+                      <option>USD $</option>
+                      <option>GBP £</option>
+                      <option>CAD</option>
+                    </select>
                     <span className="sr-only">, change currency</span>
                   </a>
                 </div>
@@ -268,7 +272,7 @@ export default function Navbar({setCartOpen}) {
               </div>
 
               {/* Flyout menus */}
-              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch z-10">
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
@@ -370,12 +374,12 @@ export default function Navbar({setCartOpen}) {
 
                 <div className="hidden lg:ml-8 lg:flex">
                   <a href="#" className="flex items-center text-gray-700 hover:text-gray-800">
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-sm font-medium">CAD</span>
+                    <select className='rounded-md p-1 bg-white'>
+                      <option>Euro €</option>
+                      <option>USD $</option>
+                      <option>GBP £</option>
+                      <option>CAD</option>
+                    </select>
                     <span className="sr-only">, change currency</span>
                   </a>
                 </div>

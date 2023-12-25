@@ -1,14 +1,13 @@
 import './App.css'
 import Header from './containers/Header.jsx'
-import Banner from './components/Banner.jsx'
-import  Main from './containers/Main.jsx'
+import  MainSection from './containers/MainSection.jsx'
 
 function App() {
 
   return (
     <>
       <Header/>
-      <Main/>
+      <MainSection/>
     </>
   )
 }

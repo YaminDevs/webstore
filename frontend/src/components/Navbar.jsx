@@ -267,7 +267,7 @@ export default function Navbar({setCartOpen}) {
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <img src={logo} className=' w-16 h-auto'/>
+                  <img src={logo} className=' w-16 h-auto h'/>
                 </a>
               </div>
 

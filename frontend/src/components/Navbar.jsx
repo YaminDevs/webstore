@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo2.png'
 
 const navigation = {
 
@@ -264,10 +264,10 @@ export default function Navbar({setCartOpen}) {
               </button>
 
               {/* Logo */}
-              <div className="ml-4 flex lg:ml-0">
+              <div className="flex shrink-0 lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <img src={logo} className=' w-16 h-auto h'/>
+                  <img src={logo} className=' w-8 h-auto '/>
                 </a>
               </div>
 
@@ -385,12 +385,9 @@ export default function Navbar({setCartOpen}) {
                 </div>
 
                 {/* Search */}
-                <div className="flex lg:ml-6">
-                  <a href="#" className="p-2 text-gray-400 hover:text-gray-500 flex flex-row border border-solid border-gray-200 rounded-md gap-4">
-                    <span className="sr-only">Search</span>
+                <div className="flex lg:ml-6 p-2 text-gray-400 hover:text-gray-500 flex-row border border-solid border-gray-200 rounded-md gap-4">
                     <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                    <input type='text' placeholder='search' className=' bg-transparent outline-none'/>
-                  </a>
+                    <input type='text' placeholder='Search' className='bg-transparent outline-none w-32 md:w-auto'/>
                 </div>
 
                 {/* Cart */}

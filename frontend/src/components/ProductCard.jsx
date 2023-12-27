@@ -8,18 +8,33 @@ export default function ProductCard({mensClothingData, setAddToCart}) {
 
     return(
         <>
-            <ul className="grid grid-cols-3 gap-6 h-full">
-                {mensClothingData.map((item) => (
-                <li className='flex flex-col items-center ' key={item.id}>
-                    <img src={item.image} alt={item.title} style={{ maxWidth: '100px', maxHeight: '100px' }}/>
-                    <strong>{item.title}</strong>
-                    <div className="flex justify-between mt-auto w-full">
-                        <p className="mt-auto mr-auto">Price: ${item.price}</p>
-                        <button className="border border-solid bg-beige-dark hover:bg-beige text-white rounded-md px-2 py-0.5 mt-auto" onClick={() => handleAddToCart(item)}>add to cart</button>
-                    </div>
-                </li>
-                ))}
-            </ul>
+            <div className="bg-white">
+                <div className="mx-auto">  
+                    <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 xl:gap-x-8 justify-center">
+                        {mensClothingData.map((item) => (
+                            <li className='flex flex-col items-center p-4' key={item.id}>
+                                <a className="group flex flex-col h-full">
+                                    <div className="aspect-h-1 aspect-w-1 flex justify-center overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="h-52 object-cover object-center group-hover:opacity-75"
+                                        />
+                                    </div>
+                                    <div className="flex-grow flex flex-col justify-between text-center">
+                                        <div>
+                                            <h3 className="mt-4 text-sm text-gray-700">{item.title}</h3>
+                                        </div>
+                                        <div>
+                                            <p className="text-lg font-medium mt-2 text-gray-900">{item.price}€</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </>
     )
 }

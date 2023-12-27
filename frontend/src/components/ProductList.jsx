@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+import ProductCard from './ProductCard'
 
 const sortOptions = [
 
@@ -65,7 +66,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function ProductList({mensClothingData, setAddToCart}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   return (
@@ -299,7 +300,9 @@ export default function Example() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3">{/* Your content */}</div>
+              <div className="lg:col-span-3">
+                <ProductCard mensClothingData={mensClothingData} setAddToCart={setAddToCart} />
+              </div>
             </div>
           </section>
         </main>

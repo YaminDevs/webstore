@@ -66,9 +66,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductList({mensClothingData, setAddToCart}) {
+export default function ProductList({mensClothingData, womensClothingData, setAddToCart}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
+const data = [...mensClothingData, ...womensClothingData]
+
+  function filterItemsByCategory(items, category) {
+    return items.filter(item => item.category === category);
+  }
+  
+  // Example usage
+  const filteredMenProducts = filterItemsByCategory(data, 'men\'s clothing');
+  console.log(filteredMenProducts);
+  
   return (
     <div className="bg-white">
       <div>
@@ -301,7 +311,7 @@ export default function ProductList({mensClothingData, setAddToCart}) {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
-                <ProductCard mensClothingData={mensClothingData} setAddToCart={setAddToCart} />
+                <ProductCard mensClothingData={mensClothingData} setAddToCart={setAddToCart} womensClothingData={womensClothingData}/>
               </div>
             </div>
           </section>

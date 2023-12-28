@@ -14,9 +14,12 @@ function App() {
   useEffect(() => {
     const fetchDataMen = async () => {
       try {
-        const response = await fetch('https://fakestoreapi.com/products/category/' + encodeURIComponent("men's clothing"));
+        const response = await fetch('https://fakestoreapi.com/products/category/men\'s clothing',{
+          
+        });
         const data = await response.json();
         setMensClothing(data);
+        console.log(data)
       } catch (error) {
         console.error('Error fetching mens clothing:', error);
       }
@@ -31,6 +34,7 @@ function App() {
         const response = await fetch('https://fakestoreapi.com/products/category/women\'s clothing');
         const data = await response.json();
         setWomensClothing(data);
+        console.log(data)
       } catch (error) {
         console.error('Error fetching womens clothing:', error);
       }

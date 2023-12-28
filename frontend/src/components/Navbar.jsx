@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom'
 
 const navigation = {
 
-
-  
   categories: [
     {
       id: 'women',
@@ -114,8 +112,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar({setCartOpen}) {
+export default function Navbar({setCartOpen, addToCart}) {
   const [open, setOpen] = useState(false)
+  let count = addToCart.length
 
   return (
     <div className="bg-white">
@@ -399,7 +398,7 @@ export default function Navbar({setCartOpen}) {
                       aria-hidden="true"
                       onClick={() => setCartOpen(true)}
                     />
-                    <span className="ml-2 text-sm font-medium text-gray-400 group-hover:text-gray-500">0</span>
+                    <span className="ml-2 text-sm font-medium text-gray-400 group-hover:text-gray-500">{count}</span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
                 </div>

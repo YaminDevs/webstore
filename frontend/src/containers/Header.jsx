@@ -6,7 +6,7 @@ const Header = ({addToCart, setAddToCart}) => {
     const [cartOpen, setCartOpen] = useState(false)
     return(
         <>
-            <Navbar cartOpen={cartOpen} setCartOpen={setCartOpen} />
+            <Navbar cartOpen={cartOpen} setCartOpen={setCartOpen} setAddToCart={setAddToCart} addToCart={addToCart}/>
             <Cart cartOpen={cartOpen} setCartOpen={setCartOpen} addToCart={addToCart} setAddToCart={setAddToCart} />
         </>
     )

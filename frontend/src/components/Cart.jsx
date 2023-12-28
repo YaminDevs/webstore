@@ -12,7 +12,7 @@ export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) 
 
   const removeItem = (itemId) => {
     setAddToCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
-  }
+  }  
 
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
@@ -83,8 +83,7 @@ export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) 
                                     <p className="mt-1 text-sm text-gray-500">{item.color}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {item.quantity}</p>
-
+                                    <p className="text-gray-500">Qty 1</p>
                                     <div className="flex">
                                       <button
                                         type="button"

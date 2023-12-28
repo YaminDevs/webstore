@@ -1,6 +1,6 @@
 
 
-export default function ProductCard({mensClothingData, womensClothingData, setAddToCart}) {
+export default function ProductCard({mensClothingData, womensClothingData, setAddToCart, sortedData}) {
 
     const handleAddToCart = (item) => {
         setAddToCart((prevCart) => [...prevCart, item]);

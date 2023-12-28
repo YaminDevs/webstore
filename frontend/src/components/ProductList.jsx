@@ -10,8 +10,8 @@ const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
   { name: 'Best Rating', href: '#', current: false },
   { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
+  { name: 'Price: Low to High', href: '#', current: false, },
+  { name: 'Price: High to Low', href: '#', current: false, },
 ]
 const subCategories = [
 
@@ -68,14 +68,13 @@ function classNames(...classes) {
 
 export default function ProductList({mensClothingData, womensClothingData, setAddToCart}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const data = [...mensClothingData, ...womensClothingData]
 
-const data = [...mensClothingData, ...womensClothingData]
-
+  
   function filterItemsByCategory(items, category) {
     return items.filter(item => item.category === category);
   }
   
-  // Example usage
   const filteredMenProducts = filterItemsByCategory(data, 'men\'s clothing');
   console.log(filteredMenProducts);
   

@@ -28,6 +28,7 @@ export default function ProductCard({mensClothingData, womensClothingData, setAd
                                         </div>
                                         <div>
                                             <p className="text-lg font-medium mt-2 text-gray-900">{item.price.toFixed(2)}€</p>
+                                            <button onClick={() => handleAddToCart(item)}>add</button>
                                         </div>
                                     </div>
                                 </a>

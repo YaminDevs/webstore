@@ -1,10 +1,13 @@
 import logo from '../assets/logo2.png'
+import { Link } from 'react-router-dom'
 
 export default function Form(){
     return(
         <div class="flex h-[90vh] flex-col justify-center align-middle px-6 py-12 lg:px-8">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img class="mx-auto h-10 w-auto" src={logo} alt="Your Company"/>
+                <Link to='/'>
+                    <img class="mx-auto h-10 w-auto" src={logo} alt="Your Company"/>
+                </Link>
                 <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
             </div>
 

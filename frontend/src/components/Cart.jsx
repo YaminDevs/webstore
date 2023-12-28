@@ -2,13 +2,17 @@ import { Fragment, } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-export default function Cart({ cartOpen, setCartOpen, addToCart }) {
+export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) {
 
   const calculateSubtotal = () => {
     return addToCart.reduce((total, item) => {
       return total + item.price;
     }, 0);
   };
+
+  const removeItem = (itemId) => {
+    setAddToCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
+  }
 
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
@@ -85,6 +89,7 @@ export default function Cart({ cartOpen, setCartOpen, addToCart }) {
                                       <button
                                         type="button"
                                         className="font-medium text-beige-dark hover:text-beige"
+                                        onClick={() => removeItem(item.id)}
                                       >
                                         Remove
                                       </button>

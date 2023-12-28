@@ -45,7 +45,7 @@ function Home() {
 
   return (
     <>
-      <Header addToCart={addToCart}/>
+      <Header addToCart={addToCart} setAddToCart={setAddToCart}/>
       <MainSection addToCart={addToCart} setAddToCart={setAddToCart} mensClothingData={mensClothing} womensClothingData={womensClothing}/>
     </>
   )

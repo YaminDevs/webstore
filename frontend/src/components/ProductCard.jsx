@@ -19,7 +19,8 @@ export default function ProductCard({mensClothingData, womensClothingData, setAd
                                         <img
                                             src={item.image}
                                             alt={item.title}
-                                            className="h-52 object-cover object-center group-hover:opacity-75"
+                                            className="h-52 object-cover object-center group-hover:opacity-75 cursor-pointer"
+                                            onClick={() => handleAddToCart(item)}
                                         />
                                     </div>
                                     <div className="flex-grow flex flex-col justify-between text-center">
@@ -28,7 +29,6 @@ export default function ProductCard({mensClothingData, womensClothingData, setAd
                                         </div>
                                         <div>
                                             <p className="text-lg font-medium mt-2 text-gray-900">{item.price.toFixed(2)}€</p>
-                                            <button onClick={() => handleAddToCart(item)}>add</button>
                                         </div>
                                     </div>
                                 </a>

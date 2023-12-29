@@ -37,7 +37,7 @@ export default function Form(){
                 </form>
                 <p class="mt-10 text-center text-sm text-gray-500">
                     Not a member?
-                    <a href="#" class="font-semibold leading-6 ml-1 text-beige-dark hover:text-beige">Register here</a>
+                    <Link to='/register' class="font-semibold leading-6 ml-1 text-beige-dark hover:text-beige">Register here</Link>
                 </p>
 
             </div>

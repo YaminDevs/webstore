@@ -225,9 +225,9 @@ export default function Navbar({setCartOpen, addToCart}) {
                     </Link>
                   </div>
                   <div className="flow-root">
-                    <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                    <Link to='/register' className="-m-2 block p-2 font-medium text-gray-900">
                       Create account
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -367,9 +367,9 @@ export default function Navbar({setCartOpen, addToCart}) {
                     Sign in
                   </Link>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                  <Link to='/register' className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">

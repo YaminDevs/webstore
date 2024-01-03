@@ -1,3 +1,4 @@
+import Footer from './Footer.jsx';
 import Header from './Header.jsx'
 import  MainSection from './MainSection.jsx'
 import { useEffect, useState } from 'react'
@@ -47,6 +48,7 @@ function Home() {
     <>
       <Header addToCart={addToCart} setAddToCart={setAddToCart}/>
       <MainSection addToCart={addToCart} setAddToCart={setAddToCart} mensClothingData={mensClothing} womensClothingData={womensClothing}/>
+      <Footer/>
     </>
   )
 }

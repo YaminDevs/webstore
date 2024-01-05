@@ -1,7 +1,28 @@
 import logo from '../assets/logo2.png'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export default function Form(){
+
+    const [ email, setEmail ] = useState('')
+    const [ password, setPassword ] = useState('')
+
+    const onEmailChange = (event) => {
+        setEmail(event.target.value);
+        console.log('email:', event.target.value)
+    }
+
+    const onPasswordChange = (event) => {
+        setPassword(event.target.value);
+        console.log('password:', event.target.value)
+    }
+
+    const onSubmitSignIn = () => {
+        onEmailChange()
+    }
+
+
+
     return(
         <div className="flex h-[90vh] flex-col justify-center align-middle px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -16,7 +37,7 @@ export default function Form(){
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div className="mt-2">
-                    <input id="email" name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
+                    <input id="email" name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none" onChange={onEmailChange}/>
                     </div>
                 </div>
                 <div>
@@ -27,7 +48,9 @@ export default function Form(){
                     </div>
                     </div>
                     <div className="mt-2">
-                    <input id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm px-2 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
+                    <input id="password" name="password" type="password" 
+                    onChange={onPasswordChange}
+                    autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm px-2 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
                     </div>
                 </div>
 

@@ -19,7 +19,7 @@ function Home() {
         });
         const data = await response.json();
         setMensClothing(data);
-        console.log(data)
+       
       } catch (error) {
         console.error('Error fetching mens clothing:', error);
       }
@@ -34,7 +34,6 @@ function Home() {
         const response = await fetch('https://fakestoreapi.com/products/category/women\'s clothing');
         const data = await response.json();
         setWomensClothing(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching womens clothing:', error);
       }
@@ -43,6 +42,16 @@ function Home() {
     fetchDataWomen();
   }, []);
 
+  useEffect(() => {
+    const server = async () => {
+        try {
+            const response = await fetch('http://localhost:3000');
+            const data = await response.json()
+        } catch (error){
+            console.log(error)
+        }
+    }
+  })
 
   return (
     <>

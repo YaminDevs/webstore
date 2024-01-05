@@ -75,8 +75,8 @@ export default function ProductList({mensClothingData, womensClothingData, setAd
     return items.filter(item => item.category === category);
   }
   
-  const filteredMenProducts = filterItemsByCategory(data, 'men\'s clothing');
-  console.log(filteredMenProducts);
+  {/*const filteredMenProducts = filterItemsByCategory(data, 'men\'s clothing');
+*/}
   
   return (
     <div className="bg-white">

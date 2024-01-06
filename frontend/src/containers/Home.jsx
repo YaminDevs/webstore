@@ -3,7 +3,7 @@ import Header from './Header.jsx'
 import  MainSection from './MainSection.jsx'
 import { useEffect, useState } from 'react'
 
-function Home() {
+function Home( { setPage } ) {
 
   const [mensClothing, setMensClothing] = useState([]);
   const [womensClothing, setWomensClothing] = useState([])
@@ -42,20 +42,9 @@ function Home() {
     fetchDataWomen();
   }, []);
 
-  useEffect(() => {
-    const server = async () => {
-        try {
-            const response = await fetch('http://localhost:3000');
-            const data = await response.json()
-        } catch (error){
-            console.log(error)
-        }
-    }
-  })
-
   return (
     <>
-      <Header addToCart={addToCart} setAddToCart={setAddToCart}/>
+      <Header addToCart={addToCart} setAddToCart={setAddToCart} setPage={setPage} />
       <MainSection addToCart={addToCart} setAddToCart={setAddToCart} mensClothingData={mensClothing} womensClothingData={womensClothing}/>
       <Footer/>
     </>

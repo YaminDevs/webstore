@@ -1,35 +1,41 @@
 import './App.css'
 import Home from './containers/Home.jsx'
-import { Route, Router, Routes } from 'react-router-dom'
 import SignIn from './containers/SignIn.jsx'
 import Register from './containers/Register.jsx'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
+  const [page, setPage] = useState('/register');
 
   useEffect(() => {
-    const data = async () => {
+    const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:3000');
         const data = await response.json();
+        console.log(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-  
-    data();
+
+    fetchData();
   }, []);
 
   return (
     <>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/sign-in' element={<SignIn/>}/>
-        <Route path='/register' element={<Register/>}/>
-      </Routes>
-      
+      {page === '/' ? (
+        <Home setPage={setPage} />
+      ) : page === '/register' ? (
+        <div>
+          <Register setPage={setPage} />
+        </div>
+      ) : page === '/signin' ? (
+        <SignIn setPage={setPage}/>
+      ) : (
+        <div>Unknown page</div>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

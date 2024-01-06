@@ -1,34 +1,54 @@
 import logo from '../assets/logo2.png'
-import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-export default function Form(){
+export default function Form( { setPage } ){
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
 
     const onEmailChange = (event) => {
         setEmail(event.target.value);
-        console.log('email:', event.target.value)
     }
 
     const onPasswordChange = (event) => {
         setPassword(event.target.value);
-        console.log('password:', event.target.value)
     }
 
-    const onSubmitSignIn = () => {
-        onEmailChange()
-    }
+    const onSubmitSignIn = (event) => {
+        event.preventDefault();
+    
+        fetch('http://localhost:3000/signin#', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error during sign-in:', error);
+        });
+    };
 
 
 
     return(
         <div className="flex h-[90vh] flex-col justify-center align-middle px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <Link to='/'>
-                    <img className="mx-auto h-10 w-auto" src={logo} alt="Your Company"/>
-                </Link>
+                <img className="mx-auto h-10 w-auto"
+                src={logo} alt="Your Company"
+                onClick={() => setPage('/')}/>
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
             </div>
 
@@ -55,7 +75,9 @@ export default function Form(){
                 </div>
 
                 <div>
-                    <button type="submit" className="flex w-full justify-center rounded-md bg-beige-dark px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-beige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-beige">Sign in</button>
+                    <button type="submit" 
+                    onSubmit={onSubmitSignIn}
+                    className="flex w-full justify-center rounded-md bg-beige-dark px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-beige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-beige">Sign in</button>
                 </div>
                 <div className="flex w-full gap-4 justify-center mt-4">
                             <div className="w-1/2">
@@ -88,7 +110,8 @@ export default function Form(){
                 </form>
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Not a member?
-                    <Link to='/register' className="font-semibold leading-6 ml-1 text-beige-dark hover:text-beige">Register here</Link>
+                    <p onClick={() => setPage('/register')} className="font-semibold leading-6 ml-1 text-beige-dark hover:text-beige">Register here
+                    </p>
                 </p>
             </div>
         </div>

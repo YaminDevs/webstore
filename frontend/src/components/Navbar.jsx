@@ -220,12 +220,12 @@ export default function Navbar({setCartOpen, addToCart, setPage}) {
                 </Tab.Group>
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <button onClick={() => setPage('/signin')} className="-m-2 block p-2 font-medium text-gray-900">
+                    <button onClick={() => setPage('signin')} className="-m-2 block p-2 font-medium text-gray-900">
                       Sign in
                     </button>
                   </div>
                   <div className="flow-root">
-                    <button onClick={() => setPage('/register')} className="-m-2 block p-2 font-medium text-gray-900">
+                    <button onClick={() => setPage('register')} className="-m-2 block p-2 font-medium text-gray-900">
                       Create account
                     </button>
                   </div>
@@ -265,10 +265,10 @@ export default function Navbar({setCartOpen, addToCart, setPage}) {
 
               {/* Logo */}
               <div className="flex shrink-0 lg:ml-0">
-                <a href="#">
+                <div onClick={() => setPage('home')}>
                   <span className="sr-only">Your Company</span>
-                  <img src={logo} className=' w-8 h-auto '/>
-                </a>
+                  <img src={logo} className=' w-8 h-auto cursor-pointer'/>
+                </div>
               </div>
 
               {/* Flyout menus */}
@@ -363,11 +363,11 @@ export default function Navbar({setCartOpen, addToCart, setPage}) {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <button onClick={() => setPage('/signin')} className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                  <button onClick={() => setPage('signin')} className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Sign in
                   </button>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <button onClick={() => setPage('/register')} className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                  <button onClick={() => setPage('register')} className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
                   </button>
                 </div>

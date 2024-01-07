@@ -5,7 +5,7 @@ import Register from './containers/Register.jsx'
 import { useEffect, useState } from 'react'
 
 function App() {
-  const [page, setPage] = useState('/register');
+  const [page, setPage] = useState('home');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,13 +23,13 @@ function App() {
 
   return (
     <>
-      {page === '/' ? (
+      {page === 'home' ? (
         <Home setPage={setPage} />
-      ) : page === '/register' ? (
+      ) : page === 'register' ? (
         <div>
           <Register setPage={setPage} />
         </div>
-      ) : page === '/signin' ? (
+      ) : page === 'signin' ? (
         <SignIn setPage={setPage}/>
       ) : (
         <div>Unknown page</div>

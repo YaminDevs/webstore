@@ -29,14 +29,18 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
+    const { email, password } = req.body;
+    let found = false;
+
     for(let i = 0; i < database.users.length; i++){
-        if(req.body.email === database.users[i].email &&
-            req.body.password === database.users[i].password){
+        if(email === database.users[i].email &&
+        password === database.users[i].password){
+        found = true
         res.json('success')
-        } else {
+        }
+        if(!found){
             res.status(400).json('error logging in')
         }
-        
     }
 })
 app.post('/register', (req, res) => {

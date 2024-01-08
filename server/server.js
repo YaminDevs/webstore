@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     res.json(database.users)
 })
 
-app.post('/signin', (req, res) => {
+app.post('/login', (req, res) => {
     const { email, password } = req.body;
     let found = false;
 
@@ -37,6 +37,7 @@ app.post('/signin', (req, res) => {
         password === database.users[i].password){
         found = true
         res.json('success')
+        break;
         }
         if(!found){
             res.status(400).json('error logging in')

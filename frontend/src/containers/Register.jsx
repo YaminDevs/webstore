@@ -1,14 +1,36 @@
 import logo from '../assets/logo2.png'
 
+import { useState } from 'react'
+
 export default function Register( {setPage} ){
+
+const [name, setName] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+
+const onEmailChange = (event) => {
+    setEmail(event.target.value);
+}
+
+const onPasswordChange = (event) => {
+    setPassword(event.target.value);
+}
+
+const onNameChange = (event) => {
+    setName(event.target.value)
+} 
 
     const onSubmitRegister = () => {
         fetch('http://localhost:3000/register', {
-                method: 'post',
-
-
-            }
-        )
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password
+            }),
+        })
+        setPage('home')
     }
 
 
@@ -21,17 +43,17 @@ export default function Register( {setPage} ){
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={onSubmitRegister} method='post' >
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
                         <div className="mt-2">
-                        <input id="name" name="name" placeholder='Name'type="text" autoComplete="email" required className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
+                        <input onChange={onNameChange} id="name" name="name" placeholder='Name'type="text" autoComplete="email" required className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
                         </div>
                     </div>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                         <div className="mt-2">
-                        <input id="email" name="email" placeholder='Email adress 'type="email" autoComplete="email" required className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
+                        <input onChange={onEmailChange} id="email" name="email" placeholder='Email adress 'type="email" autoComplete="email" required className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
                         </div>
                     </div>
                     <div>
@@ -41,7 +63,7 @@ export default function Register( {setPage} ){
                         </div>
                         </div>
                         <div className="mt-2">
-                        <input id="password" name="password" placeholder='Password'  type="password" autoComplete="current-password" required className="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
+                        <input onChange={onPasswordChange} id="password" name="password" placeholder='Password'  type="password" autoComplete="current-password" required className="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-beige sm:text-sm sm:leading-6 outline-none"/>
                         </div>
                     </div>
                     <div>

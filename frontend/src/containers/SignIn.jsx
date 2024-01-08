@@ -15,7 +15,7 @@ export default function SignIn( { setPage } ){
     }
 
     const onSubmitSignIn = () => {
-        fetch('http://localhost:3000/signin', {
+        fetch('http://localhost:3000/login' ,{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -23,14 +23,8 @@ export default function SignIn( { setPage } ){
                 password: password
             })
         })
-        .then(respone => respone.json())
-        .then(data => {
-            if(data === 'success'){
-                setPage('/')
-            }
-        })
-    };
-
+        .then(setPage('home'))
+    }
 
 
     return(
@@ -43,7 +37,7 @@ export default function SignIn( { setPage } ){
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6">
+            <form className="space-y-6" onSubmit={onSubmitSignIn}>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div className="mt-2">
@@ -66,9 +60,10 @@ export default function SignIn( { setPage } ){
 
                 <div>
                     <button
-                    onSubmit={onSubmitSignIn}
+                    type='submit'
                     className="flex w-full justify-center rounded-md bg-beige-dark px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-beige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-beige">Sign in</button>
                 </div>
+                </form>
                 <div className="flex w-full gap-4 justify-center mt-4">
                             <div className="w-1/2">
                                 <button className=" bg-[#F2F2F2] rounded-lg  flex justify-center hover:bg-gray-400 w-full fill-white">
@@ -97,7 +92,6 @@ export default function SignIn( { setPage } ){
                                 </button>
                             </div>
                             </div>
-                </form>
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Not a member?
                     <span onClick={() => setPage('register')} className="font-semibold leading-6 ml-1 text-beige-dark hover:text-beige cursor-pointer">Register here

@@ -1,7 +1,7 @@
 import logo from '../assets/logo2.png'
 import { useState } from 'react'
 
-export default function SignIn( { setPage } ){
+export default function SignIn( { setPage, loadUser } ){
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
@@ -14,17 +14,29 @@ export default function SignIn( { setPage } ){
         setPassword(event.target.value);
     }
 
-    const onSubmitSignIn = () => {
-        fetch('http://localhost:3000/login' ,{
+    const onSubmitSignIn = async (event) => {
+        event.preventDefault();
+        try {
+          const response = await fetch('http://localhost:3000/login', {
             method: 'post',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email: email,
-                password: password
+              email: email,
+              password: password
             })
-        })
-        .then(setPage('home'))
-    }
+          });
+      
+          if (!response.ok) {
+            throw new Error('Invalid credentials');
+          }
+      
+          const data = await response.json();
+          loadUser(data)
+          setPage('home')
+        } catch (error) {
+          console.error('Error during login:', error);
+        }
+      };
 
 
     return(
@@ -37,7 +49,7 @@ export default function SignIn( { setPage } ){
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" onSubmit={onSubmitSignIn}>
+            <form className="space-y-6" onSubmit={onSubmitSignIn} method='post'>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div className="mt-2">

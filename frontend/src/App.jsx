@@ -6,6 +6,23 @@ import { useEffect, useState } from 'react'
 
 function App() {
   const [page, setPage] = useState('home');
+  const [user, setUser] = useState({
+    user:{
+      id: '',
+      name: '',
+      email: ''
+    }
+  })
+
+  const loadUser = (data) => {
+    setUser({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+
+    })
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +47,7 @@ function App() {
           <Register setPage={setPage} />
         </div>
       ) : page === 'signin' ? (
-        <SignIn setPage={setPage}/>
+        <SignIn setPage={setPage} loadUser={loadUser}/>
       ) : (
         <div>Unknown page</div>
       )}

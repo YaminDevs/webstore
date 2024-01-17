@@ -1,6 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const knex = require('knex')
+
+const postgres = knex({
+    client: 'pg',
+    connection: {
+        host: '127.0.0.1',
+        user: 'luxora',
+        password: '',
+        database: 'luxora'
+    }
+})
+
 
 const app = express()
 app.use(bodyParser.json())
@@ -44,30 +56,35 @@ app.post('/login', (req, res) => {
         }
     }
 })
-app.post('/register', (req, res) => {
-    const {email, name, password} = req.body;
-    database.users.push({
-        id : "3",
-        name: name,
+app.post('/register', async (req, res) => {
+    try {
+      const { email, name, password } = req.body;
+      await postgres('users')
+      .returning('*')
+      .insert({
         email: email,
-        password: password
-    })
-    res.json(database.users[database.users.length-1])
-
-})
-app.get('/profile/:id', (req, res) => {
-    const { id } = req.params;
-    let found = false
-    database.users.forEach(user => {
-        if(user.id === id){
-            found = true
-            return res.json(user)
-        }
-    })
-    if(!found){
-        res.status(400).json('not found')
+        name: name,
+        joined: new Date()
+      });
+      res.json(database.users[database.users.length - 1]);
+    } catch (error) {
+      res.status(400).json('Error registering user');
     }
+  });
+  
+app.get('/profile/:id', async (req, res) => {
+    const { id } = req.params;
+        await postgres.select('*').from('users').where({
+            'id': id
+        })
+        if(user.length){
+            res.json(user[0])
+        }else{
+            res.status(400).json('user not found')
+        }
+    
 })
+
 app.post('/admin', (req, res) => {
     res.json('admin')
 })

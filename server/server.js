@@ -2,12 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const knex = require('knex')
+const bcrypt = require('bcryptjs')
+
+
+
 
 const postgres = knex({
     client: 'pg',
     connection: {
         host: '127.0.0.1',
-        user: 'luxora',
+        user: '',
         password: '',
         database: 'luxora'
     }
@@ -59,18 +63,38 @@ app.post('/login', (req, res) => {
 app.post('/register', async (req, res) => {
     try {
       const { email, name, password } = req.body;
-      await postgres('users')
-      .returning('*')
-      .insert({
-        email: email,
-        name: name,
-        joined: new Date()
+      const saltRounds = 10;
+  
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hash = await bcrypt.hash(password, salt);
+  
+      await postgres.transaction(async (trx) => {
+        await trx
+          .insert({
+            hash: hash,
+            email: email
+          })
+          .into('login')
+          .returning('email');
+  
+        await trx('users')
+          .insert({
+            email: email,
+            name: name,
+            password: hash,
+            created: new Date()
+          })
+          .into('users')
+          .returning('*');
+  
+        res.json(newUser[0]);
       });
-      res.json(database.users[database.users.length - 1]);
     } catch (error) {
+      console.error('Error registering user:', error);
       res.status(400).json('Error registering user');
     }
   });
+  
   
 app.get('/profile/:id', async (req, res) => {
     const { id } = req.params;
@@ -82,7 +106,6 @@ app.get('/profile/:id', async (req, res) => {
         }else{
             res.status(400).json('user not found')
         }
-    
 })
 
 app.post('/admin', (req, res) => {

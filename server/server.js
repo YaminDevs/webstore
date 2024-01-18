@@ -22,44 +22,40 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-const database = {
-    users: [
-        {
-            id : "1",
-            name : "brian",
-            email : "brian@gmail.com",
-            password : "ghetto"
-        },
-        {
-            id : "2",
-            name : "Laura",
-            email : "laura@gmail.com",
-            password : "fresh"
-        }
-    ]
-}
-
-
 app.get('/', (req, res) => {
     res.json(database.users)
 })
 
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    let found = false;
-
-    for(let i = 0; i < database.users.length; i++){
-        if(email === database.users[i].email &&
-        password === database.users[i].password){
-        found = true
-        res.json('success')
-        break;
-        }
-        if(!found){
-            res.status(400).json('error logging in')
-        }
+app.post('/login', async (req, res) => {
+    try {
+      const loginData = await postgres
+        .select('email', 'hash')
+        .from('login')
+        .where('email', '=', req.body.email);
+  
+      if (loginData.length === 0) {
+        return res.status(400).json('wrong credentials');
+      }
+  
+      const { email, hash } = loginData[0];
+      const isValid = await bcrypt.compare(req.body.password, hash);
+  
+      if (isValid) {
+        const userData = await postgres
+          .select('*')
+          .from('users')
+          .where('email', '=', email);
+  
+        res.json(userData[0]);
+      } else {
+        res.status(400).json('wrong credentials');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(400).json('unable to login');
     }
-})
+  });
+
 app.post('/register', async (req, res) => {
     try {
       const { email, name, password } = req.body;
@@ -77,7 +73,7 @@ app.post('/register', async (req, res) => {
           .into('login')
           .returning('email');
   
-        await trx('users')
+        const user = await trx('users')
           .insert({
             email: email,
             name: name,
@@ -87,7 +83,7 @@ app.post('/register', async (req, res) => {
           .into('users')
           .returning('*');
   
-        res.json(newUser[0]);
+        res.json(user[0]);
       });
     } catch (error) {
       console.error('Error registering user:', error);

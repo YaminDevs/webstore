@@ -23,7 +23,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/', (req, res) => {
-    res.json(database.users)
+    res.json(postgres.users)
 })
 
 app.post('/login', async (req, res) => {
@@ -104,19 +104,58 @@ app.get('/profile/:id', async (req, res) => {
         }
 })
 
-app.post('/admin', (req, res) => {
-    res.json('admin')
-})
+app.post('/admin', async (req, res) => {
+    try {
+      const loginData = await postgres
+        .select('email', 'hash')
+        .from('admin')
+        .where('email', '=', req.body.email);
+  
+      if (loginData.length === 0) {
+        return res.status(400).json('wrong credentials');
+      }
+  
+      const { email, hash } = loginData[0];
+      const isValid = await bcrypt.compare(req.body.password, hash);
+  
+      if (isValid) {
+        const userData = await postgres
+          .select('*')
+          .from('users')
+          .where('email', '=', email);
+  
+        res.json(userData[0]);
+      } else {
+        res.status(400).json('wrong credentials');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(400).json('unable to login');
+    }
+  });
+
+  app.post('/items', async (req, res) => {
+    try {
+        const { name, image, description, price } = req.body;
+
+        const item = await postgres
+        .insert({
+            name: name,
+            image: image,
+            description: description,
+            price: price
+        })
+        .into('items')
+        .returning('*');
+    
+        res.json(item[0]);
+;
+      } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(400).json('Error registering user');
+      }
+  });
 
 app.listen(3000, () => {
     console.log('app is running on port 3000')
 })
-
-
-
-/*
-/ --> res = homepage
-/signin --> POST = succes/fail
-/register --> POST = user
-/profile/:userId --> GET = user
-*/

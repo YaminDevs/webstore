@@ -3,15 +3,14 @@ import Home from './containers/Home.jsx'
 import SignIn from './containers/SignIn.jsx'
 import Register from './containers/Register.jsx'
 import { useEffect, useState } from 'react'
+import Dashboard from './containers/Dashboard.jsx'
 
 function App() {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState('dashboard');
   const [user, setUser] = useState({
-    user:{
       id: '',
       name: '',
       email: ''
-    }
   })
 
   const loadUser = (data) => {
@@ -23,21 +22,6 @@ function App() {
     })
   }
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/');
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <>
       {page === 'home' ? (
@@ -47,10 +31,15 @@ function App() {
           <Register setPage={setPage} />
         </div>
       ) : page === 'signin' ? (
-        <SignIn setPage={setPage} loadUser={loadUser}/>
-      ) : (
-        <div>Unknown page</div>
-      )}
+        <SignIn setPage={setPage} loadUser={loadUser} user={user}/>
+      ) : page === 'dashboard' ?(
+        <Dashboard setPage={setPage}/>
+      ) :
+        (
+          <div>
+            Page Not Found
+          </div>
+        )}
     </>
   );
 }

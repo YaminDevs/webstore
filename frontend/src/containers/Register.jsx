@@ -1,8 +1,7 @@
 import logo from '../assets/logo2.png'
-
 import { useState } from 'react'
 
-export default function Register( {setPage} ){
+export default function Register( { setPage } ){
 
 const [name, setName] = useState('')
 const [email, setEmail] = useState('')

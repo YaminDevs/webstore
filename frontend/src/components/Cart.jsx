@@ -12,7 +12,9 @@ export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) 
 
   const removeItem = (itemId) => {
     setAddToCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
-  }  
+  }
+
+
 
   return (
     <Transition.Root show={cartOpen} as={Fragment}>

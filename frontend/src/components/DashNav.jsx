@@ -1,18 +1,21 @@
 import React from "react";
 
-export default function DashNav(){
+export default function DashNav( {setDashboard} ) {
     return(
         <>
             <div className="flex justify-between items-center p-3 px-8">
-                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Logo" className="w-10 h-10"/>
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Logo" className="w-10 h-10 cursor-pointer" onClick={() => setDashboard('')}/>
                 <ul className="flex gap-8 ">
-                    <li>
+                    <li className="cursor-pointer" onClick={setDashboard('products')}>
                         Products
                     </li>
-                    <li>
+                    <li className="cursor-pointer"  onClick={setDashboard('add')}>
+                        Add Product
+                    </li>
+                    <li className="cursor-pointer">
                         Orders
                     </li>
-                    <li>
+                    <li className="cursor-pointer">
                         Users
                     </li>
                 </ul>

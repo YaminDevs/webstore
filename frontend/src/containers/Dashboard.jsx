@@ -3,11 +3,11 @@ import DashNav from "../components/DashNav";
 import AddItem from "../components/AddItem";
 const Dashboard = () => {
 
-    const [dashboard, setDashboard] = useState('add');
+    const [dashboard, setDashboard] = useState('');
    
     return(
         <>
-            <DashNav/>
+            <DashNav setDashboard={setDashboard}/>
             <>
             {/* {page === 'products' ? (
                 <Products/>

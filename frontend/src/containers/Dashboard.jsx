@@ -19,7 +19,7 @@ const Dashboard = () => {
                 <SignIn/>
             ) :  */}
             {dashboard === 'add' ? (
-                <AddItem/>
+                <AddItem setDashobard={setDashboard}/>
             ) : (
                     <div>
                         Page Not Found

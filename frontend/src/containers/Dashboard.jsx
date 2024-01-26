@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import DashNav from "../components/DashNav";
 import AddItem from "../components/AddItem";
+import Products from "../components/Products";
 const Dashboard = () => {
 
     const [dashboard, setDashboard] = useState('');
-   
+    const [file, setFile] = useState(null);
+
     return(
         <>
             <DashNav setDashboard={setDashboard}/>
             <>
-            {/* {page === 'products' ? (
-                <Products/>
-            ) : page === 'orders' ? (
+            { dashboard === 'products' ? (
+                <Products file={file} setFile={setFile}/>
+            ) : dashboard === 'add' ? (
                 <div>
-                <Register/>
+                <AddItem setDashobard={setDashboard} file={file} setFile={setFile} />
                 </div>
-            ) : page === 'users' ? (
-                <SignIn/>
-            ) :  */}
-            {dashboard === 'add' ? (
-                <AddItem setDashobard={setDashboard}/>
-            ) : (
+            ) : 
+            (
                     <div>
                         Page Not Found
                     </div>

@@ -1,11 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const knex = require('knex')
-const bcrypt = require('bcryptjs')
-
-
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const knex = require('knex');
+const bcrypt = require('bcryptjs');
+const multer = require('multer');
+const path = require('path');
 
 const postgres = knex({
     client: 'pg',
@@ -15,12 +14,55 @@ const postgres = knex({
         password: '',
         database: 'luxora'
     }
-})
+});
 
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+app.use("/uploads", express.static("./uploads"));
 
-const app = express()
-app.use(bodyParser.json())
-app.use(cors())
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'uploads'); 
+  },
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/items', upload.single('image'), async (req, res) => {
+  try {
+      const { name, description, price } = req.body;
+      const imagePath =  req.file.path;  // Add a leading slash to the path
+
+      const item = await postgres
+          .insert({
+              name: name,
+              image: imagePath,
+              description: description,
+              price: price
+          })
+          .into('items')
+          .returning('*');
+
+      res.json(item[0]);
+  } catch (error) {
+      console.error('Error creating item:', error);
+      res.status(500).json({ error: 'Error creating item' });
+  }
+});
+
+app.get('/products', async (req, res) => {
+  try {
+      const products = await postgres.select('*').from('items');
+      res.json(products);
+  } catch (error) {
+      console.error('Error retrieving products:', error);
+      res.status(500).json('Error retrieving products');
+  }
+});
 
 app.get('/', (req, res) => {
     res.json(postgres.users)
@@ -121,7 +163,7 @@ app.post('/admin', async (req, res) => {
       if (isValid) {
         const userData = await postgres
           .select('*')
-          .from('users')
+          .from('admin')
           .where('email', '=', email);
   
         res.json(userData[0]);
@@ -134,27 +176,6 @@ app.post('/admin', async (req, res) => {
     }
   });
 
-  app.post('/items', async (req, res) => {
-    try {
-        const { name, image, description, price } = req.body;
-
-        const item = await postgres
-        .insert({
-            name: name,
-            image: image,
-            description: description,
-            price: price
-        })
-        .into('items')
-        .returning('*');
-    
-        res.json(item[0]);
-;
-      } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(400).json('Error registering user');
-      }
-  });
 
 app.listen(3000, () => {
     console.log('app is running on port 3000')

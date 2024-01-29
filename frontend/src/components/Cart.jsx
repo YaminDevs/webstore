@@ -5,13 +5,13 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) {
 
   const calculateSubtotal = () => {
-    return addToCart.reduce((total, item) => {
-      return total + item.price;
+    return addToCart.reduce((total, product) => {
+      return total + parseFloat(product.price);
     }, 0);
   };
-
+  
   const removeItem = (itemId) => {
-    setAddToCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
+    setAddToCart((prevCart) => prevCart.filter((product) => product.id !== itemId));
   }
 
 
@@ -64,12 +64,12 @@ export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) 
                       <div className="mt-8">
                         <div className="flow-root">
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {addToCart.map((item) => (
-                              <li key={item.id} className="flex py-6">
+                            {addToCart.map((product) => (
+                              <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
                                   <img
-                                    src={item.image}
-                                    alt={item.title}
+                                    src={`http://localhost:3000/${product.image}`}
+                                    alt={product.title}
                                     className="h-full object-center"
                                   />
                                 </div>
@@ -78,11 +78,11 @@ export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) 
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <a href={item.href}>{item.title}</a>
+                                        <a href={product.href}>{product.title}</a>
                                       </h3>
-                                      <p className="ml-4">{item.price.toFixed(2)}€</p>
+                                      <p className="ml-4">{product.price}€</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">{item.color}</p>
+                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <p className="text-gray-500">Qty 1</p>
@@ -90,7 +90,7 @@ export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) 
                                       <button
                                         type="button"
                                         className="font-medium text-beige-dark hover:text-beige"
-                                        onClick={() => removeItem(item.id)}
+                                        onClick={() => removeItem(product.id)}
                                       >
                                         Remove
                                       </button>
@@ -107,7 +107,7 @@ export default function Cart({ cartOpen, setCartOpen, addToCart, setAddToCart}) 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>{calculateSubtotal().toFixed(2)}€</p>
+                        <p>{calculateSubtotal()}€</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import Dashboard from './containers/Dashboard.jsx'
 
 function App() {
-  const [page, setPage] = useState('dashboard');
+  const [page, setPage] = useState('home');
   const [user, setUser] = useState({
       id: '',
       name: '',

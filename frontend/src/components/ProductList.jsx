@@ -66,9 +66,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductList({mensClothingData, womensClothingData, setAddToCart}) {
+export default function ProductList({products,  setAddToCart}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const data = [...mensClothingData, ...womensClothingData]
+  const data = [...products, ]
 
   
   function filterItemsByCategory(items, category) {
@@ -310,7 +310,7 @@ export default function ProductList({mensClothingData, womensClothingData, setAd
 
               {/* Product grid */}
               <div className="lg:col-span-3">
-                <ProductCard mensClothingData={mensClothingData} setAddToCart={setAddToCart} womensClothingData={womensClothingData}/>
+                <ProductCard products={products} setAddToCart={setAddToCart} />
               </div>
             </div>
           </section>

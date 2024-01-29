@@ -1,11 +1,11 @@
 import Banner from "../components/Banner";
 import ProductList from "../components/ProductList";
 
-export default function MainSection({mensClothingData, womensClothingData, setAddToCart}) {
+export default function MainSection({products, setAddToCart}) {
     return(
         <> 
             <Banner/>
-            <ProductList mensClothingData={mensClothingData} setAddToCart={setAddToCart} womensClothingData={womensClothingData}/>
+            <ProductList products={products} setAddToCart={setAddToCart} />
         </>
     )
 }

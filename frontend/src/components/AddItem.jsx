@@ -42,6 +42,10 @@ export default function AddItem({ setFile, file}) {
             if (!response.ok) {
                 throw new Error(`Server error: ${response.status} ${response.statusText}`);
             }
+            setName('');
+            setDescription('');
+            setPrice('');
+            handleReset();
 
             const data = await response.json();
             console.log('Product added successfully:', data);
@@ -76,7 +80,6 @@ export default function AddItem({ setFile, file}) {
                 <input type="text" placeholder='description' className='py-1 px-2' onChange={onDescriptionChange} />
                 <input type="number" min="0.01" step="0.01" required={true} placeholder='price' className='py-2 px-2' onChange={onPriceChange} />
                 <button type="submit" className='inline-block rounded-md border border-transparent bg-beige-dark px-4 py-1 text-center font-medium text-white hover:bg-beige'>Add Product</button>
-                    Add Product
             </form>
         </div>
     );

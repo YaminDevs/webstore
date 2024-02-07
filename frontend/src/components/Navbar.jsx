@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from '../assets/logo2.png'
+import Dropdown from './Dropdown';
 
 const navigation = {
 
@@ -386,8 +387,11 @@ export default function Navbar({setCartOpen, addToCart, setPage}) {
                 {/* Search */}
                 <div className="flex lg:ml-6 p-2 text-gray-400 hover:text-gray-500 flex-row border border-solid border-gray-200 rounded-md gap-4">
                     <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                    <input type='text' placeholder='Search' className='bg-transparent outline-none w-32 md:w-auto'/>
+                    <input type='text' placeholder='Search' className='bg-transparent outline-none w-16 md:w-48'/>
                 </div>
+
+                {/* User Profile */}
+                  <Dropdown/>
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6" onClick={() => setCartOpen(true)}>

@@ -3,7 +3,7 @@ import Header from './Header.jsx'
 import  MainSection from './MainSection.jsx'
 import { useEffect, useState } from 'react'
 
-function Home( { setPage } ) {
+function Home( { setPage, user } ) {
 
   const [products, setProducts] = useState([]);
   const [searchfield, setSearchfield] = useState('')
@@ -35,7 +35,7 @@ useEffect(() => {
 
   return (
     <>
-      <Header addToCart={addToCart} setAddToCart={setAddToCart} setPage={setPage} />
+      <Header addToCart={addToCart} setAddToCart={setAddToCart} setPage={setPage} user={user} />
       <MainSection addToCart={addToCart} setAddToCart={setAddToCart} products={products} />
       <Footer/>
     </>

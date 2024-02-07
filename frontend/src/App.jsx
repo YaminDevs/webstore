@@ -2,7 +2,7 @@ import './App.css'
 import Home from './containers/Home.jsx'
 import SignIn from './containers/SignIn.jsx'
 import Register from './containers/Register.jsx'
-import { useEffect, useState } from 'react'
+import { useState, useEffect} from 'react'
 import Dashboard from './containers/Dashboard.jsx'
 
 function App() {
@@ -10,22 +10,44 @@ function App() {
   const [user, setUser] = useState({
       id: '',
       name: '',
-      email: ''
+      email: '',
+      created: '',
   })
 
-  const loadUser = (data) => {
-    setUser({
-      id: data.id,
-      name: data.name,
-      email: data.email,
+  const loadUser = async (userId) => {
+    try {
+        const response = await fetch(`http://localhost:3000/profile/${userId}`, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json' },
+        });
 
-    })
-  }
+        if (!response.ok) {
+            throw new Error('Failed to fetch products');
+        }
+
+        const data = await response.json();
+        setUser(
+            {
+                id: data.id,
+                name: data.name,
+                email: data.email,
+                created: data.created,
+            }
+        );
+        console.log(data);
+    } catch (error) {
+        console.error('Error fetching products:', error.message);
+    }
+};
+
+useEffect(() => {
+    loadUser();
+}, []);
 
   return (
     <>
       {page === 'home' ? (
-        <Home setPage={setPage} />
+        <Home setPage={setPage} user={user}/>
       ) : page === 'register' ? (
         <div>
           <Register setPage={setPage} />

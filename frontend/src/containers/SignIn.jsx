@@ -30,9 +30,11 @@ export default function SignIn( { setPage, loadUser} ){
             throw new Error('Invalid credentials');
           }
       
-          const data = await response.json();
-          loadUser(data)
+          const userData = await response.json();
+          const userId = userData.id
           setPage('home')
+
+          await loadUser(userId)
         } catch (error) {
           console.error('Error during login:', error);
         }
